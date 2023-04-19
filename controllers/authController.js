@@ -1,13 +1,16 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models/user");
+const { User, validateUser } = require("../models/user");
 require("dotenv").config();
 const secret = process.env.secret;
 // console.log("secret", secret);
 
 async function register(req, res) {
-  console.log(req.body);
-
+  // console.log(req.body);
+  const validationResult = validateUser(req.body);
+  if (validationResult.error) {
+    return res.status(400).send(validationResult.error.details[0].message);
+  }
   let user = await User.findOne({ email: req.body.email });
 
   if (user) {
@@ -33,7 +36,8 @@ async function register(req, res) {
     const token = jwt.sign(
       {
         _id: response._id,
-        name: `${response.firstName} ${response.lastName}`,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: response.email,
         phone: response.phone,
       },
@@ -69,14 +73,15 @@ async function login(req, res) {
   const token = jwt.sign(
     {
       _id: user._id,
-      name: `${user.firstName} ${user.lastName}`,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       phone: user.phone,
     },
     secret
   );
   res.send({
-    message: "User Logged in Sucessfully",
+    msg: "User Logged in Sucessfully",
     name: `${user.firstName} ${user.lastName}`,
     email: user.email,
     isAuthenticated: true,

@@ -29,6 +29,10 @@ const resumeSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      location: {
+        type: String,
+        required: true,
+      },
       position: {
         type: String,
         required: true,
@@ -52,6 +56,10 @@ const resumeSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      percentge: {
+        type: Number,
+        required: true,
+      },
       fieldOfStudy: {
         type: String,
         required: true,
@@ -65,6 +73,25 @@ const resumeSchema = new mongoose.Schema({
       },
     },
   ],
+  hobbies: {
+    type: [String],
+  },
+  linkedIn: {
+    type: String,
+    required: true,
+  },
+  skype: {
+    type: String,
+    required: true,
+  },
+  twitter: {
+    type: String,
+    required: true,
+  },
+  github: {
+    type: String,
+    required: true,
+  },
 });
 
 const Resume = mongoose.model("Resume", resumeSchema);
@@ -75,11 +102,16 @@ const validateResume = (resume) => {
     lastName: Joi.string().min(0).max(50).required(),
     email: Joi.string().email().min(5).max(255).required(),
     phone: Joi.string().min(10).max(10).required(),
+    linkedIn: Joi.string().min(10).max(10).required(),
+    github: Joi.string().min(10).max(10).required(),
+    skype: Joi.string().min(10).max(10).required(),
+    twitter: Joi.string().min(10).max(10).required(),
     address: Joi.string().min(0).max(255),
     summary: Joi.string().min(0).max(1000),
     experience: Joi.array().items(
       Joi.object({
-        title: Joi.string().min(0).max(255).required(),
+        position: Joi.string().min(0).max(255).required(),
+        location: Joi.string().min(0).max(255).required(),
         company: Joi.string().min(0).max(255).required(),
         startDate: Joi.date().required(),
         endDate: Joi.date(),
@@ -89,14 +121,16 @@ const validateResume = (resume) => {
     education: Joi.array().items(
       Joi.object({
         institution: Joi.string().min(0).max(255).required(),
+        fieldOfStudy: Joi.string().min(0).max(255).required(),
         degree: Joi.string().min(0).max(255).required(),
+        percentge: Joi.number().min(0).max(3).required(),
         startDate: Joi.date().required(),
         endDate: Joi.date(),
         description: Joi.string().min(0).max(1000),
       })
     ),
     skills: Joi.array().items(Joi.string().min(0).max(255)),
-    interests: Joi.array().items(Joi.string().min(0).max(255)),
+    hobbies: Joi.array().items(Joi.string().min(0).max(50)),
   });
 
   const validationResult = resumeSchema.validate(resume);
