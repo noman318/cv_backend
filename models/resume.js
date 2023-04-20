@@ -56,7 +56,7 @@ const resumeSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      percentge: {
+      percentage: {
         type: Number,
         required: true,
       },
@@ -82,11 +82,9 @@ const resumeSchema = new mongoose.Schema({
   },
   skype: {
     type: String,
-    required: true,
   },
   twitter: {
     type: String,
-    required: true,
   },
   github: {
     type: String,
@@ -102,10 +100,10 @@ const validateResume = (resume) => {
     lastName: Joi.string().min(0).max(50).required(),
     email: Joi.string().email().min(5).max(255).required(),
     phone: Joi.string().min(10).max(10).required(),
-    linkedIn: Joi.string().min(10).max(10).required(),
-    github: Joi.string().min(10).max(10).required(),
-    skype: Joi.string().min(10).max(10).required(),
-    twitter: Joi.string().min(10).max(10).required(),
+    linkedIn: Joi.string().min(5).max(50).required(),
+    github: Joi.string().min(5).max(50).required(),
+    skype: Joi.string().min(5).max(50),
+    twitter: Joi.string().min(5).max(50),
     address: Joi.string().min(0).max(255),
     summary: Joi.string().min(0).max(1000),
     experience: Joi.array().items(
@@ -123,7 +121,7 @@ const validateResume = (resume) => {
         institution: Joi.string().min(0).max(255).required(),
         fieldOfStudy: Joi.string().min(0).max(255).required(),
         degree: Joi.string().min(0).max(255).required(),
-        percentge: Joi.number().min(0).max(3).required(),
+        percentage: Joi.number().required(),
         startDate: Joi.date().required(),
         endDate: Joi.date(),
         description: Joi.string().min(0).max(1000),

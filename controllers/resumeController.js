@@ -17,17 +17,21 @@ const createResume = async (req, res) => {
       skills: req.body.skills,
       experience: req.body.experience,
       education: req.body.education,
+      github: req.body.github,
+      linkedIn: req.body.linkedIn,
     });
 
     await resume.save();
 
     res.send({
+      err: 0,
       msg: "Resume Created Sucessfully",
+      id: resume._id,
       resume,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send("Server error");
+    res.send({ err: 1, msg: error });
   }
 };
 
