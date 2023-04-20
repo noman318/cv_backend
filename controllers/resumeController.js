@@ -73,4 +73,21 @@ const getAllResume = async (req, res) => {
   }
 };
 
-module.exports = { createResume, getAllResume, updateResume };
+const getResumeById = async (req, res) => {
+  try {
+    const resume = await Resume.findById(req.params.id);
+    if (!resume)
+      return res
+        .status(404)
+        .send("The resume with the given ID was not found.");
+
+    res.send({
+      msg: "Resume Found",
+      resume,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createResume, getAllResume, updateResume, getResumeById };
