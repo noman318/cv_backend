@@ -75,6 +75,7 @@ const resumeSchema = new mongoose.Schema({
   ],
   hobbies: {
     type: [String],
+    required: true,
   },
   linkedIn: {
     type: String,

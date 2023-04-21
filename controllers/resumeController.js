@@ -15,11 +15,15 @@ const createResume = async (req, res) => {
       email: req.body.email,
       phone: req.body.phone,
       skills: req.body.skills,
+      hobbies: req.body.hobbies,
+      skype: req.body.skype,
+      twitter: req.body.twitter,
       experience: req.body.experience,
       education: req.body.education,
       github: req.body.github,
       linkedIn: req.body.linkedIn,
     });
+    // console.log("resume", resume);
 
     await resume.save();
 
