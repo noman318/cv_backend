@@ -22,6 +22,8 @@ const createResume = async (req, res) => {
       education: req.body.education,
       github: req.body.github,
       linkedIn: req.body.linkedIn,
+      address: req.body.address,
+      summary: req.body.summary,
     });
     // console.log("resume", resume);
 

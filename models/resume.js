@@ -19,6 +19,14 @@ const resumeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  address: {
+    type: String,
+    required: true,
+  },
+  summary: {
+    type: String,
+    required: true,
+  },
   skills: {
     type: [String],
     required: true,
@@ -105,8 +113,8 @@ const validateResume = (resume) => {
     github: Joi.string().min(5).max(50).required(),
     skype: Joi.string().min(5).max(50),
     twitter: Joi.string().min(5).max(50),
-    address: Joi.string().min(0).max(255),
-    summary: Joi.string().min(0).max(1000),
+    address: Joi.string().min(0).max(1000).required(),
+    summary: Joi.string().min(0).max(1000).required(),
     experience: Joi.array().items(
       Joi.object({
         position: Joi.string().min(0).max(255).required(),
