@@ -43,8 +43,8 @@ const createResume = async (req, res) => {
 
 const updateResume = async (req, res) => {
   try {
-    const { error } = validateResume(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    // const { error } = validateResume(req.body);
+    // if (error) return res.status(400).send(error.details[0].message);
 
     const updatedResume = await Resume.findByIdAndUpdate(
       req.params.id,
@@ -60,12 +60,13 @@ const updateResume = async (req, res) => {
         .send("The resume with the given ID was not found.");
 
     res.send({
+      err: 0,
       msg: "Resume Updated Sucessfully",
       updatedResume,
     });
   } catch (ex) {
     console.log(ex);
-    res.status(500).send("Something failed.");
+    res.status(500).send("Something went Wrong please try again.");
   }
 };
 
