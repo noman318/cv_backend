@@ -58,6 +58,7 @@ const updateResume = async (req, res) => {
 
     res.send({
       err: 0,
+      status: 200,
       msg: "Resume Updated Sucessfully",
       updatedResume,
     });
@@ -72,6 +73,7 @@ const getAllResume = async (req, res) => {
   try {
     const resumes = await Resume.find({ user: userId });
     res.send({
+      status: 200,
       msg: "All of your Resumes",
       resumes,
     });
@@ -90,6 +92,7 @@ const getResumeById = async (req, res) => {
         .send("The resume with the given ID was not found.");
 
     res.send({
+      status: 200,
       msg: "Resume Found",
       resume,
     });

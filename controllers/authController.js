@@ -45,6 +45,7 @@ async function register(req, res) {
     );
     res.send({
       err: 0,
+      status: 200,
       msg: "Registered Successfully",
       token: token,
       id: response._id,
@@ -81,6 +82,7 @@ async function login(req, res) {
     secret
   );
   res.send({
+    status: 200,
     msg: "User Logged in Sucessfully",
     name: `${user.firstName} ${user.lastName}`,
     email: user.email,
