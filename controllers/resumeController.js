@@ -43,9 +43,6 @@ const createResume = async (req, res) => {
 
 const updateResume = async (req, res) => {
   try {
-    // const { error } = validateResume(req.body);
-    // if (error) return res.status(400).send(error.details[0].message);
-
     const updatedResume = await Resume.findByIdAndUpdate(
       req.params.id,
       {
