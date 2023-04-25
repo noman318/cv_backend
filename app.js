@@ -4,10 +4,10 @@ const cors = require("cors");
 const { router } = require("./routes/userRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
 require("dotenv").config();
-const port = 5000;
+const port = process.env.PORT;
 const app = express();
 
-const connectionString = "mongodb://127.0.0.1:27017/assestment";
+const connectionString = process.env.MONGO_URL;
 mongoose
   .connect(connectionString, {
     useUnifiedTopology: true,
